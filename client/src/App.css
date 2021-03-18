@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@300&display=swap');
+
+:root {
+  --color-whitish: whitesmoke;
+  --standard-padding: 10px;
+  --standard-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #d1dbd8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Rokkitt', serif;
+}
+
+h1 {
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+h3 {
+  border-bottom: 1px solid rgb(241, 221, 221);
+  padding-bottom: var(--standard-padding);
+  margin: 40px 0 10px;
+}
+
+h4 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+label {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+input[type='text'],
+input[type='number'] {
+  border: 1px solid #b4aeae;
+  border-radius: 2px;
+  display: block;
+  font-size: 1rem;
+  padding: var(--standard-padding);
+  width: var(--standard-width);
+}
+
+.container {
+  margin: 30px auto;
+  width: 350px;
+}
+
+.income-expense-container {
+  background-color: rgb(223, 223, 223);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.income-expense-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+.income-expense-container > div:first-of-type {
+  border-right: 2px double #c2bdbd;
+}
+
+.money {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 5px 0;
+}
+.money.income {
+  color: #42d85b;
+}
+.money.expense {
+  color: #b11342;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #54b7c9;
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 1rem;
+  margin: 10px 0 30px;
+  padding: var(--standard-padding);
+  width: var(--standard-width);
+}
+
+.delete-btn {
+  cursor: pointer;
+  background-color: #c03425;
+  border: 0;
+  color: rgb(196, 190, 190);
+  font-size: 20px;
+  line-height: 20px;
+  padding: 2px 5px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:focus,
+.delete-btn:focus {
+  outline: 0;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+.list li {
+  background-color: rgb(230, 227, 227);
+  color: rgb(63, 57, 57);
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: var(--standard-padding);
+  margin: 10px 0;
+}
+.list li.income {
+  border-right: 5px solid #42d85b;
+}
+.list li.expense {
+  border-right: 5px solid #b11342;
+}
+.list li:hover .delete-btn {
+  opacity: 1;
+  /* background-color: darkorange; */
+  border: 2px solid #7e1c11b0;
+}
