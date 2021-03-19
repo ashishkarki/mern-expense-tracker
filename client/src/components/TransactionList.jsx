@@ -14,19 +14,18 @@ function TransactionList() {
 
         getTransactions()
 
-        //// eslint-disable-next-line react-hooks/exhaustive-deps
         return () => {
             source.cancel()
         }
-    }, [])
+    }, [ getTransactions ])
 
     return (
         <>
             <h3>Transaction History</h3>
             <ul className="list">
                 {
-                    transactions.map(txn => (
-                        <Transaction key={ txn.id } transaction={ txn } />
+                    transactions.map((txn, idx) => (
+                        <Transaction key={ idx } transaction={ txn } />
                     ))
                 }
             </ul>

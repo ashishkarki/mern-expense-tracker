@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useCallback } from 'react'
 import axios from 'axios'
 import AppReducer from './AppReducer'
 
@@ -26,21 +26,24 @@ export const GlobalProvider = ({ children }) => {
     const [ state, dispatch ] = useReducer(AppReducer, initialState)
 
     // actions
-    const getTransactions = async () => {
-        try {
-            const res = await axios.get('/api/v1/transactions')
+    const getTransactions = useCallback(
+        async () => {
+            try {
+                const res = await axios.get('/api/v1/transactions')
 
-            dispatch({
-                type: ACTION_TYPES.GET_TRANSACTIONS,
-                payload: res.data.data, // axios returns everything inside a data object = {success:.., data: ..}
-            })
-        } catch (err) {
-            dispatch({
-                type: ACTION_TYPES.TRANSACTION_ERROR,
-                payload: err.response.data.error,
-            })
-        }
-    }
+                dispatch({
+                    type: ACTION_TYPES.GET_TRANSACTIONS,
+                    payload: res.data.data, // axios returns everything inside a data object = {success:.., data: ..}
+                })
+            } catch (err) {
+                dispatch({
+                    type: ACTION_TYPES.TRANSACTION_ERROR,
+                    payload: err.response.data.error,
+                })
+            }
+        },
+        [],
+    )
 
     const deleteTransaction = (deletedId) => {
         dispatch({
