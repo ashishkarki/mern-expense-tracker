@@ -1,9 +1,24 @@
-import React, { useContext } from 'react'
+import axios from 'axios'
+import React, { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import Transaction from './Transaction'
 
 function TransactionList() {
-    const { transactions } = useContext(GlobalContext)
+    const {
+        transactions,
+        getTransactions }
+        = useContext(GlobalContext)
+
+    useEffect(() => {
+        const source = axios.CancelToken.source()
+
+        getTransactions()
+
+        //// eslint-disable-next-line react-hooks/exhaustive-deps
+        return () => {
+            source.cancel()
+        }
+    }, [])
 
     return (
         <>

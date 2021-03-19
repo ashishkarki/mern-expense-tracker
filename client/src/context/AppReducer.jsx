@@ -2,12 +2,20 @@ import { ACTION_TYPES } from './GlobalState'
 
 const AppReducer = (state, action) => {
     switch (action.type) {
+        case ACTION_TYPES.GET_TRANSACTIONS:
+            return {
+                ...state,
+                loading: false,
+                transactions: action.payload,
+            }
+
         case ACTION_TYPES.DELETE_TXN:
             return {
                 ...state,
                 transactions: state.transactions.filter(txn =>
                     txn.id !== action.payload)
             }
+
         case ACTION_TYPES.ADD_TXN:
             const newTxn = {
                 id: new Date().getMilliseconds() * Math.random(),
@@ -17,7 +25,13 @@ const AppReducer = (state, action) => {
 
             return {
                 ...state,
-                transactions: [ newTxn, ...state.transactions ]
+                transactions: [ ...state.transactions, newTxn ]
+            }
+
+        case ACTION_TYPES.TRANSACTION_ERROR:
+            return {
+                ...state,
+                error: action.payload
             }
 
         default:
