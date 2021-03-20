@@ -12,7 +12,7 @@ export const ACTION_TYPES = {
 // Initial State
 const initialState = {
     transactions: [
-        { id: 1, desc: 'Sample Txn', amount: -1 },
+        { _id: 1, desc: 'Sample Txn', amount: 0 },
     ],
     error: null,
     loading: true,
@@ -45,21 +45,50 @@ export const GlobalProvider = ({ children }) => {
         [],
     )
 
-    const deleteTransaction = (deletedId) => {
-        dispatch({
-            type: ACTION_TYPES.DELETE_TXN,
-            payload: deletedId,
-        })
+    const deleteTransaction = async (deletedId) => {
+        try {
+            await axios.delete(`/api/v1/transactions/${ deletedId }`)
+
+            dispatch({
+                type: ACTION_TYPES.DELETE_TXN,
+                payload: deletedId,
+            })
+        } catch (err) {
+            dispatch({
+                type: ACTION_TYPES.TRANSACTION_ERROR,
+                payload: err.response.data.error,
+            })
+        }
     }
 
-    const addTransaction = (desc, amount) => {
-        dispatch({
-            type: ACTION_TYPES.ADD_TXN,
-            payload: {
-                desc: desc,
-                amount: parseFloat(amount),
+    const addTransaction = async (desc, amount) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
             }
-        })
+        }
+        const userInputTxn = {
+            desc: desc,
+            amount: parseFloat(amount)
+        }
+
+        try {
+            const res = await axios.post(
+                `/api/v1/transactions`,
+                userInputTxn,
+                config,
+            )
+
+            dispatch({
+                type: ACTION_TYPES.ADD_TXN,
+                payload: res.data.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ACTION_TYPES.TRANSACTION_ERROR,
+                payload: err.response.data.error,
+            })
+        }
     }
 
     return (

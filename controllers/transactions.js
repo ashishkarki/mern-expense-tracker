@@ -9,7 +9,7 @@ exports.getTransactions = async (req, res, next) => {
 
         return _buildSuccessResponse(res, transasctions, 200)
     } catch (error) {
-        return _buildErrorResponse(res)
+        return _buildErrorResponse(res, error)
     }
 }
 
@@ -23,7 +23,7 @@ exports.addTransaction = async (req, res, next) => {
 
         return _buildSuccessResponse(res, transaction, 201)
     } catch (error) {
-        return _buildErrorResponse(res)
+        return _buildErrorResponse(res, error)
     }
 }
 
@@ -37,14 +37,19 @@ exports.deleteTransaction = async (req, res, next) => {
         const transaction = await Transaction.findById(id)
 
         if (!transaction) {
-            return _buildErrorResponse(res, 'Transaction not Found', 404)
+            return _buildErrorResponse(
+                res,
+                { name: 'none' },
+                'Transaction not Found',
+                404
+            )
         }
 
         await transaction.remove()
 
         return _buildSuccessResponse(res, {})
     } catch (error) {
-        return _buildErrorResponse(res)
+        return _buildErrorResponse(res, error)
     }
 }
 
@@ -62,6 +67,7 @@ const _buildSuccessResponse = (
 
 const _buildErrorResponse = (
     res,
+    error,
     errMsg = 'Server error',
     status = 500
 ) => {

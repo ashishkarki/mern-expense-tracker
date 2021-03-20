@@ -24,8 +24,11 @@ function TransactionList() {
             <h3>Transaction History</h3>
             <ul className="list">
                 {
-                    transactions.map((txn, idx) => (
-                        <Transaction key={ idx } transaction={ txn } />
+                    transactions.map(txn => (
+                        <Transaction
+                            key={ txn._id }
+                            transaction={ txn }
+                        />
                     ))
                 }
             </ul>
