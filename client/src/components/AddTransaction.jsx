@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 
 function AddTransaction() {
-    const DESCRIPTION_PLACEHOLDER = 'Enter description..'
+    const DESCRIPTION_PLACEHOLDER = ''
     const { addTransaction } = useContext(GlobalContext)
 
     const [ desc, setDesc ] = useState('')

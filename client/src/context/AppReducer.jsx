@@ -13,7 +13,7 @@ const AppReducer = (state, action) => {
             return {
                 ...state,
                 transactions: state.transactions.filter(txn =>
-                    txn.id !== action.payload)
+                    txn._id !== action.payload)
             }
 
         case ACTION_TYPES.ADD_TXN:

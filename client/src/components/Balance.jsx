@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import { numberWithCommas } from '../utils/formatter'
 
 const Balance = () => {
     const { transactions } = useContext(GlobalContext)
@@ -8,11 +9,12 @@ const Balance = () => {
         .toFixed(2)
 
     const sign = total < 0 ? '-' : '+'
+    const formattedTotal = numberWithCommas(Math.abs(total))
 
     return (
         <>
             <h4>Your Balance:</h4>
-            <h1>{ sign }${ Math.abs(total) }</h1>
+            <h1>{ sign }${ formattedTotal }</h1>
         </>
     )
 }
