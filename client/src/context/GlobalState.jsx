@@ -12,7 +12,7 @@ export const ACTION_TYPES = {
 // Initial State
 const initialState = {
     transactions: [
-        { id: 1, desc: 'Sample Txn', amount: 0 },
+        { _id: 1, desc: 'Sample Txn', amount: 0 },
     ],
     error: null,
     loading: true,

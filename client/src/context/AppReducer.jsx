@@ -17,15 +17,12 @@ const AppReducer = (state, action) => {
             }
 
         case ACTION_TYPES.ADD_TXN:
-            const newTxn = {
-                id: new Date().getMilliseconds() * Math.random(),
-                desc: action.payload.desc,
-                amount: parseFloat(action.payload.amount),
-            }
-
             return {
                 ...state,
-                transactions: [ ...state.transactions, newTxn ]
+                transactions: [
+                    ...state.transactions,
+                    action.payload
+                ]
             }
 
         case ACTION_TYPES.TRANSACTION_ERROR:

@@ -12,9 +12,6 @@ const Transaction = ({ transaction }) => {
             <span>
                 { sign }${ numberWithCommas(Math.abs(transaction.amount)) }
             </span>
-            <button onClick={ alert('clicked') }>
-                { transaction._id }
-            </button>
             <button className='delete-btn'
                 onClick={ () => deleteTransaction(transaction._id) }>
                 X
